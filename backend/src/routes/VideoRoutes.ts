@@ -5,7 +5,7 @@ import * as videoController from './VideoController'
 
 router.get('/videos', videoController.getVideos)
 
-router.post('/videos/:id', videoController.crearVideo)
+router.post('/videos', videoController.crearVideo)
 
 router.get('/videos/:id', videoController.getVideo)
 

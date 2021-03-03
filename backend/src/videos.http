@@ -1,15 +1,34 @@
 @api_url = http://localhost:5000
 
+//LISTAR VIDEOS
 GET {{api_url}}/videos
 
-###
-GET {{api_url}}/videos/1
 
+//LISTAR VIDEO
 ###
-POST {{api_url}}/videos/1
+GET {{api_url}}/videos/603f88005f0eb632dc5ee49d
+//CREAR VIDEOS
+###
+POST {{api_url}}/videos
+Content-Type: application/json
 
-###
-PUT {{api_url}}/videos/1
+{
+    "url": "https://www.youtube.com/watch?v=NWMRx4G9zjo",
+    "titulo": "El cuarteto de Ibai",
+    "descripcion": "Esta es la canción de Ibai"
+}
 
+
+//ACTUALIZAR VIDEOS
 ###
-DELETE {{api_url}}/videos/1
+PUT {{api_url}}/videos/603f8829162ed7219856d2e5
+Content-Type: application/json
+
+{
+    "titulo": "Cuarteto de Ibai actualizado"
+
+}
+
+//ELIMINAR VIDEO
+###
+DELETE {{api_url}}/videos/603f89c21ab17a325c7100b3
