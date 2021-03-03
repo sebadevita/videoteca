@@ -1,0 +1,15 @@
+@api_url = http://localhost:5000
+
+GET {{api_url}}/videos
+
+###
+GET {{api_url}}/videos/1
+
+###
+POST {{api_url}}/videos/1
+
+###
+PUT {{api_url}}/videos/1
+
+###
+DELETE {{api_url}}/videos/1

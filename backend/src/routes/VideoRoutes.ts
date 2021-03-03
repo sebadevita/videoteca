@@ -1,7 +1,17 @@
 import {Router} from 'express'
 const router = Router()
 
-router.get('/videos', (req, res) => res.json("obteniendo videos")) 
+import * as videoController from './VideoController'
+
+router.get('/videos', videoController.getVideos)
+
+router.post('/videos/:id', videoController.crearVideo)
+
+router.get('/videos/:id', videoController.getVideo)
+
+router.delete('/videos/:id', videoController.eliminarVideo)
+
+router.put('/videos/:id', videoController.actualizarVideo)
 
 
 export default router
