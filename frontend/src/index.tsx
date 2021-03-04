@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route, Switch} from 'react-router-dom'
 
 import VideoList from './componentes/Videos/VideosList'
 import VideoForm from './componentes/Videos/VideoForm'
 
+import './index.css'
+import 'bootswatch/dist/united/bootstrap.min.css'
+import Navbar from './componentes/Navbar/Navbar';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+      <Navbar/>
       <Switch>
           <Route exact path="/" component={VideoList} />
           <Route path="/nuevo-video" component={VideoForm} />
