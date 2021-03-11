@@ -2,26 +2,34 @@ import React from "react";
 import { Video } from "./Video";
 import ReactPlayer from "react-player";
 import {useHistory} from 'react-router-dom'
+import * as VideoService from "./VideoService";
 
 import './VideoItem.css'
 
 interface Props {
-  video: Video;
+  video: Video
+  getVideos: () => void
 }
 
-const VideoItem = ({ video }: Props) => {
 
+
+const VideoItem = ({ video, getVideos }: Props) => {
+  
+  const handleDelete = async (id: string) => {
+    await VideoService.eliminarVideo(id)
+    getVideos()
+  
+  }
     const history = useHistory()
 
 
   return (
     <div className="col-md-4">
-      <div className="card card-body video-card" style={{cursor: 'pointer'}}
-        onClick={()=> history.push(`/actualizar-video/${video._id}`)}>
+      <div className="card card-body video-card" style={{cursor: 'pointer'}}>
             
         <div className="d-flex justify-content-between">
-          <h1>{video.titulo}</h1>
-          <span className="text-danger">X</span>
+          <h1 onClick={()=> history.push(`/actualizar-video/${video._id}`)}>{video.titulo}</h1>
+          <span className="text-danger" onClick={() => video._id && handleDelete(video._id)}>X</span>
         </div>
         <p>{video.descripcion}</p>
 
