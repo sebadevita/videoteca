@@ -1,18 +1,27 @@
-import React from 'react'
-import { Video } from './Video'
-
+import React from "react";
+import { Video } from "./Video";
+import ReactPlayer from "react-player";
 
 interface Props {
-    video: Video
+  video: Video;
 }
 
-const VideoItem = ({video}: Props) => {
-    return (
-        <div>
-            <h1>{video.titulo}</h1>
-            <p>{video.descripcion}</p>
+const VideoItem = ({ video }: Props) => {
+  return (
+    <div className="col-md-4">
+      <div className="card card-body">
+        <div className="d-flex justify-content-between">
+          <h1>{video.titulo}</h1>
+          <span className="text-danger">X</span>
+        </div>
+        <p>{video.descripcion}</p>
+
+        <div className="embed-responsive embed-responsive-16by9">
+          <ReactPlayer url={video.url} />
+        </div>
+      </div>
     </div>
-    )
-}
+  );
+};
 
-export default VideoItem
+export default VideoItem;
