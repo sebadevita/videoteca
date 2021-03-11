@@ -1,29 +1,36 @@
-import React, {ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useState} from "react";
+import {useHistory} from 'react-router-dom'
+import { toast } from "react-toastify";
 import { Video } from "./Video";
-import * as VideoService from './VideoService'
+import * as VideoService from "./VideoService";
 
-type InputChange = ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
+type InputChange =
+  | ChangeEvent<HTMLInputElement>
+  | ChangeEvent<HTMLTextAreaElement>;
 
 const VideoForm = () => {
 
-    const [video, setVideo] = useState<Video>({
-        titulo: "",
-        descripcion: "",
-        url: "",
-    })
+  const history = useHistory()
 
-
-    const handleInputChange = (e: InputChange) =>{
-        setVideo({ ...video, [e.target.name]: e.target.value })
+  const estadoInicial = {
+    titulo: "",
+    descripcion: "",
+    url: "",
   }
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) =>{
-      e.preventDefault()
-      console.log(video)
+  const [video, setVideo] = useState<Video>(estadoInicial);
 
-    }
+  const handleInputChange = (e: InputChange) => {
+    setVideo({ ...video, [e.target.name]: e.target.value });
+  };
 
-   
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    await VideoService.crearVideo(video);
+    toast.success("El video se subió correctamente!");
+    setVideo(estadoInicial)
+    // history.push('/')
+  };
 
   return (
     <div className="row">
@@ -40,6 +47,7 @@ const VideoForm = () => {
                   placeholder="Ingrese el titulo del video..."
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.titulo}
                   autoFocus
                 ></input>
               </div>
@@ -51,6 +59,7 @@ const VideoForm = () => {
                   placeholder="https://ejemplo.com"
                   className="form-control"
                   onChange={handleInputChange}
+                  value={video.url}
                   autoFocus
                 ></input>
               </div>
@@ -61,13 +70,12 @@ const VideoForm = () => {
                   placeholder="Ingrese una descripción del video..."
                   rows={3}
                   onChange={handleInputChange}
+                  value={video.descripcion}
                   className="form-control"
                 ></textarea>
               </div>
-              
-              <button className="btn btn-primary">Subir video
-              </button>
-              
+
+              <button className="btn btn-primary">Subir video</button>
             </form>
           </div>
         </div>
