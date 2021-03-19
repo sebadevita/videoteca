@@ -18,6 +18,17 @@ Content-Type: application/json
     "descripcion": "Esta es la canción de Ibai"
 }
 
+//VALIDAR TITULO DEL VIDEO
+
+###
+POST {{api_url}}/videos
+Content-Type: application/json
+
+{
+    "url": "https://www.youtube.com/watch?v=_DzBez4qMi0",
+    "descripcion": "Esta es la canción de Ibai"
+}
+
 
 //ACTUALIZAR VIDEOS
 ###

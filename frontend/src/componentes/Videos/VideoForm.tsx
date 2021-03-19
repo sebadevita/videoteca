@@ -28,16 +28,14 @@ const VideoForm = () => {
 
   const validarTitulo = () => {
     if (!video.titulo) {
-      setFallo(true)
-      setError("El campo título es obligatorio")
+      throw Error("El campo título es obligatorio")
       
     }
   }
   
   const validarUrl = () => {
     if (!video.url) {
-      setFallo(true)
-      setError("El campo URL es obligatorio")
+      throw Error("El campo URL es obligatorio")
       
     }
   }
@@ -53,14 +51,21 @@ const VideoForm = () => {
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    validarErrores()
-    if (!params.id) {
-      await VideoService.crearVideo(video)
-      toast.success("El video se subió correctamente!")
-      setVideo(estadoInicial)
-    } else {
-      await VideoService.actualizarVideo(params.id, video)
-      history.push("/")
+    
+    
+    try {
+      validarErrores()
+      if (!params.id) {
+        await VideoService.crearVideo(video)
+        toast.success("¡El video se subió correctamente!")
+        setVideo(estadoInicial)
+      } else {
+        await VideoService.actualizarVideo(params.id, video)
+        history.push("/")
+      }
+    } catch (error) {
+        setFallo(true)
+        setError(error.message)
     }
   }
 
